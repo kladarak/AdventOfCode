@@ -11,8 +11,10 @@ int main()
 
 	for (auto& line : lines)
 	{
-		// remove \n from end of each line.
-		line.pop_back();
+		if (line.back() == '\n')
+		{
+			line.pop_back();
+		}
 	}
 
 	size_t numCodeCharacters = 0;
@@ -43,7 +45,27 @@ int main()
 		}
 	}
 
-	size_t difference = numCodeCharacters - numLiteralCharacters;
-	cout << "Difference = " << difference << endl;
+	size_t diffTest1 = numCodeCharacters - numLiteralCharacters;
+	cout << "Difference Test 1 = " << diffTest1 << endl;
+
+	size_t numCodeCharsWithEscapedChars = 0;
+	for (auto& line : lines)
+	{
+		for (char c : line)
+		{
+			if (c == '\"' || c == '\\')
+			{
+				++numCodeCharsWithEscapedChars;
+			}
+
+			++numCodeCharsWithEscapedChars;
+		}
+
+		numCodeCharsWithEscapedChars += 2; // Start and end with new quotes.
+	}
+
+	size_t diffTest2 = numCodeCharsWithEscapedChars - numCodeCharacters;
+	cout << "Difference Test 2 = " << diffTest2 << endl;
+
 	return 0;
 }
