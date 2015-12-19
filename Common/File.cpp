@@ -13,9 +13,9 @@ namespace FileHelper
 
 		if (pFile != nullptr)
 		{
-			char buffer[256];
+			char buffer[1024];
 
-			while (fgets(buffer, 256, pFile) != nullptr)
+			while (fgets(buffer, 1024, pFile) != nullptr)
 			{
 				string line = buffer;
 				lines.push_back(line);
